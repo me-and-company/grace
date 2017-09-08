@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cp node_modules/babel-polyfill/dist/polyfill.min.js src/js/singles/polyfill.js
+cp node_modules/jquery/dist/jquery.min.js src/js/libs/first/jquery.js

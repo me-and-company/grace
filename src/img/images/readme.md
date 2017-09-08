@@ -1,0 +1,1 @@
+all files here will be optimized with standard settings

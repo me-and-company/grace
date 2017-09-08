@@ -1,0 +1,110 @@
+/*----------------------------------------------*\
+    TEMPLATE
+    
+    this is a template file
+\*----------------------------------------------*/
+
+/*
+** MODULE NAME
+** ANY COMMENTS / ANNOTATIONS
+*/
+
+.module-name {
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    padding: $baseline $base-spacing;
+    border: 1px solid black;
+    outline: none;
+    margin-bottom: $baseline;
+    
+    overflow: hidden;
+    display: block;
+    float: none;
+    visibility: hidden;
+    
+    background-color: black;
+    background-image: url('../img/image.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    color: white;
+    font-size: $font-size-h3;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+    
+    opacity: 1;
+    cursor: pointer;
+    
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: $z-module;
+    
+    transform: translate(-50%);
+    
+    transition: opacity 0.5s ease 0s;
+    
+    
+    &::before {
+        
+    }
+    
+    &::after {
+        
+    }
+    
+    &::first-letter {
+        
+    }
+    
+    
+    &:link, &:visited {
+        
+    }
+    
+    &:hover, &:focus, &:active {
+        
+    }
+    
+    
+    &:nth-child(2n) {
+        
+    }
+    
+    
+    .elementname {
+        
+    }
+    
+        .otherelement {
+            
+        }
+    
+    
+    &.is-hidden (
+    
+    )
+}
+
+
+
+/*
+** MODULE NAME
+** ALTERNATIVE
+*/
+.module-name.-alternative {
+    
+}
+
+
+
+/*
+** MEDIA QUERIES
+*/
+@include breakpoint(md) {
+    .module-name {
+        width: 80%;
+    }
+}

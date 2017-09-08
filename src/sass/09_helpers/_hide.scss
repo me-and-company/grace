@@ -1,0 +1,54 @@
+.hide {
+    display: none;
+}
+
+.hidden {
+    height: 0;
+    width: 0;
+
+    display: inline-block;
+
+    visibility: hidden;
+}
+
+@include breakpoint(lg) {
+    .hide-lg {
+        display: none;
+    }
+}
+
+@include breakpoint(only-lg) {
+    .hide-only-lg {
+        display: none;
+    }
+}
+
+@include breakpoint(md) {
+    .hide-md {
+        display: none;
+    }
+}
+
+@include breakpoint(only-md) {
+    .hide-only-md {
+        display: none;
+    }
+}
+
+@include breakpoint(sm) {
+    .hide-sm {
+        display: none;
+    }
+}
+
+@include breakpoint(only-sm) {
+    .hide-only-sm {
+        display: none;
+    }
+}
+
+@include breakpoint(xs) {
+    .hide-xs {
+        display: none;
+    }
+}
