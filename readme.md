@@ -35,9 +35,9 @@ With ``gulp include`` the html files get build and ``gulp html`` minifies them i
 
 We have variables for most attributes in CSS, which are individual for each project and design related.
 
-* define [basic variables](Link), like maximum page size, values for [spacing rhythm](http://typecast.com/blog/4-simple-steps-to-vertical-rhythm)
-* define [breakpoints](Link zur breakpoints Datei)
-* define [color variables](Link), [font-size variables](Link), [grid options](Link), [spacing variables](Link)
+* define [basic variables](/src/sass/01_settings/_base-vars.scss), like maximum page size, values for [spacing rhythm](http://typecast.com/blog/4-simple-steps-to-vertical-rhythm)
+* define [breakpoints](/src/sass/01_settings/_breakpoints.scss)
+* define [color variables](/src/sass/01_settings/_colors.scss), [font-size variables](/src/sass/01_settings/_font-sizes.scss), [grid options](/src/sass/01_settings/_grid.scss), [spacing variables](/src/sass/01_settings/_spacing.scss)
 * see [settings](/src/sass/01_settings)
 
 #### Tools
@@ -59,16 +59,16 @@ We implemented a sass generated grid. You are able to choose your preferred grid
 * ``col-offset-6``, ``col-lg-offset-6``, ``col-md-offset-6``, ``col-sm-offset-6``, ``col-xs-offset-6``
 
 #### Atoms, Elements, Modules
-We are using a customized approach of [Atomic Design](http://bradfrost.com/blog/post/atomic-web-design/). We decided to call molecules 'elements' and organisms 'modules'. Semantically they are pretty much the same. [*Why, look at our [Living Development Guidelines](Link))*]
+We are using a customized approach of [Atomic Design](http://bradfrost.com/blog/post/atomic-web-design/). We decided to call molecules 'elements' and organisms 'modules'. Semantically they are pretty much the same.
 
-Have a look at our [template file](Link) for a suggested structure of attribute declarations and examples of usage.
+Have a look at our [template file](/src/sass/_template.scss) for a suggested structure of attribute declarations and examples of usage.
 
 #### Helper Classes
 
 Instead of creating a variation of an element or atom class for unique styling cases we are using helper classes.
 * spacing: ``.mt-1``, ``.mb-1``, ``.n-mt-1``, ``.mt-md-1``, ``.pt-1``, ``...``
 * font styling: ``.font-lg-base``, ``.font-bold``, ``.text-uppercase``, ``...``
-* see [helpers](Link) for more
+* see [helpers](/src/sass/09_helpers) for more
 
 ### 3. JavaScript
 * support of EcmaScript6 via [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/)
