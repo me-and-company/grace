@@ -1,101 +1,108 @@
 /*----------------------------------------------*\
     TEMPLATE
-    
+
     this is a template file
 \*----------------------------------------------*/
 
 /*
 ** MODULE NAME
-** ANY COMMENTS / ANNOTATIONS
+**
+** description
 */
 
 .module-name {
-    box-sizing: border-box;
-    width: 100%;
-    height: auto;
-    padding: $baseline $base-spacing;
-    border: 1px solid black;
-    outline: none;
-    margin-bottom: $baseline;
-    
-    overflow: hidden;
-    display: block;
-    float: none;
-    visibility: hidden;
-    
-    background-color: black;
-    background-image: url('../img/image.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-    color: white;
-    font-size: $font-size-h3;
-    font-weight: normal;
-    text-transform: uppercase;
-    text-align: center;
-    
-    opacity: 1;
-    cursor: pointer;
-    
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: $z-module;
-    
-    transform: translate(-50%);
-    
-    transition: opacity 0.5s ease 0s;
-    
-    
-    &::before {
-        
+  box-sizing: border-box;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+  padding: $baseline $base-spacing;
+  border: 1px solid black;
+  margin-bottom: $baseline;
+
+  overflow: hidden;
+  display: block;
+  float: none;
+  visibility: hidden;
+
+  background-color: black;
+  background-image: url('../img/image.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  color: white;
+  font-size: $font-size-h3;
+  font-weight: normal;
+  text-transform: uppercase;
+  text-align: center;
+
+  opacity: 1;
+  cursor: pointer;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: $z-module;
+
+  transform: translate(-50%);
+
+  transition: opacity 0.5s ease 0s;
+
+  &:link, &:visited {
+
+  }
+
+  &:hover, &:focus, &:active {
+
+  }
+
+
+  &::before {
+
+  }
+
+  &::after {
+
+  }
+
+  &::first-letter {
+
+  }
+
+
+  &:nth-child(2n) {
+
+  }
+
+
+  .elementname {
+
+  }
+
+    .inner-element {
+
     }
-    
-    &::after {
-        
-    }
-    
-    &::first-letter {
-        
-    }
-    
-    
-    &:link, &:visited {
-        
-    }
-    
-    &:hover, &:focus, &:active {
-        
-    }
-    
-    
-    &:nth-child(2n) {
-        
-    }
-    
-    
-    .elementname {
-        
-    }
-    
-        .otherelement {
-            
-        }
-    
-    
-    &.is-hidden (
-    
-    )
 }
 
 
 
 /*
-** MODULE NAME
-** ALTERNATIVE
+** MODULE STATUS
+**
+** description
+*/
+.module-name.is-hidden {
+
+}
+
+
+
+/*
+** MODULE ALTERNATIVE
+**
+** description
 */
 .module-name.-alternative {
-    
+
 }
 
 
@@ -104,7 +111,7 @@
 ** MEDIA QUERIES
 */
 @include breakpoint(md) {
-    .module-name {
-        width: 80%;
-    }
+  .module-name {
+    width: 80%;
+  }
 }
