@@ -1,6 +1,6 @@
-(function($) {
-  'use strict';
+import $ from 'jquery';
 
-  //load modules, call functions, create objects ...
 
-}(jQuery));
+$(document).ready(() => {
+  console.log('start here');
+});
