@@ -19,6 +19,9 @@
     "babel-preset-env": "^1.6.0",
     "browser-sync": "^2.18.13",
     "del": "^3.0.0",
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
     "fs": "0.0.2",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^4.0.0",
@@ -37,13 +40,13 @@
     "imagemin-jpegoptim": "^5.1.0",
     "imagemin-jpegtran": "^5.0.2",
     "imagemin-mozjpeg": "^6.0.0",
-    "imagemin-pngquant": "^5.0.0",
-    "jquery": "^3.2.1"
+    "imagemin-pngquant": "^5.0.0"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "glob": "^7.1.1",
     "imagemin-svgo": "^5.2.0",
+    "jquery": "^3.2.1",
     "normalize.css": "^7.0.0"
   }
 }
