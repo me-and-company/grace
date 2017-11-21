@@ -21,7 +21,7 @@ There is a basic ``index.html`` file, where you can import template snippets via
 
         <html>
 
-        @@include('/src/html/snippets/header.html');
+        @@include('./src/html/snippets/header.html');
 
         ...
 

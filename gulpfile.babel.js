@@ -325,6 +325,7 @@ export { dev };
 
 
 const build = gulp.series(
+  include,
   gulp.parallel(html, styles, scripts),
   images,
   icons
