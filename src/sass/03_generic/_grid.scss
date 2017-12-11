@@ -23,9 +23,11 @@ $screen-xs: "only screen and (max-width: #{$breakpoint-xs})";
 */
 
 @if $grid-variation == 'float' {
-    @include grid-float();
-} @else if $grid-variation == 'flex' {
-    @include grid-flex();
-} @else if $grid-variation == 'inlineblock' {
-    @include grid-inlineblock();
+  @include grid-float();
+}
+@else if $grid-variation == 'flex' {
+  @include grid-flex();
+}
+@else if $grid-variation == 'inlineblock' {
+  @include grid-inlineblock();
 }

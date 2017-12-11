@@ -1,8 +1,8 @@
 $breakpoints: (
-    lg: 1800px,
-    md: 1200px,
-    sm: 900px,
-    xs: 600px
+  lg: 1800px,
+  md: 1200px,
+  sm: 900px,
+  xs: 600px
 );
 
 $breakpoint-lg: nth( map-get($breakpoints, 'lg'), 1 );

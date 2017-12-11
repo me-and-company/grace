@@ -4,6 +4,7 @@
     this is a template file
 \*----------------------------------------------*/
 
+
 /*
 ** MODULE NAME
 **
@@ -44,14 +45,17 @@
   z-index: $z-module;
 
   transform: translate(-50%);
-
   transition: opacity 0.5s ease 0s;
 
-  &:link, &:visited {
+
+  &:link,
+  &:visited {
 
   }
 
-  &:hover, &:focus, &:active {
+  &:hover,
+  &:focus,
+  &:active {
 
   }
 
@@ -59,11 +63,9 @@
   &::before {
 
   }
-
   &::after {
 
   }
-
   &::first-letter {
 
   }
@@ -84,16 +86,13 @@
 }
 
 
-
 /*
 ** MODULE STATUS
 **
 ** description
 */
-.module-name.is-hidden {
 
-}
-
+.module-name.is-hidden {}
 
 
 /*
@@ -101,15 +100,14 @@
 **
 ** description
 */
-.module-name.-alternative {
 
-}
-
+.module-name.-alternative {}
 
 
 /*
 ** MEDIA QUERIES
 */
+
 @include breakpoint(md) {
   .module-name {
     width: 80%;

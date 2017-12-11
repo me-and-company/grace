@@ -1,54 +1,72 @@
 .hide {
-    display: none;
+  display: none;
 }
 
 .hidden {
-    height: 0;
-    width: 0;
-
-    display: inline-block;
-
-    visibility: hidden;
+  height: 0;
+  width: 0;
+  display: inline-block;
+  visibility: hidden;
 }
 
+
+// BREAKPOINT LG
 @include breakpoint(lg) {
-    .hide-lg {
-        display: none;
-    }
+  .hide-lg {
+    display: none;
+  }
 }
 
 @include breakpoint(only-lg) {
-    .hide-only-lg {
-        display: none;
-    }
+  .hide-only-lg {
+    display: none;
+  }
 }
 
+
+// BREAKPOINT MD
 @include breakpoint(md) {
-    .hide-md {
-        display: none;
-    }
+  .hide-md {
+    display: none;
+  }
 }
 
 @include breakpoint(only-md) {
-    .hide-only-md {
-        display: none;
-    }
+  .hide-only-md {
+    display: none;
+  }
 }
 
+@include breakpoint(md-and-up) {
+  .hide-md-and-up {
+    display: none;
+  }
+}
+
+
+// BREAKPOINT SM
 @include breakpoint(sm) {
-    .hide-sm {
-        display: none;
-    }
+  .hide-sm {
+    display: none;
+  }
 }
 
 @include breakpoint(only-sm) {
-    .hide-only-sm {
-        display: none;
-    }
+  .hide-only-sm {
+    display: none;
+  }
 }
 
+@include breakpoint(sm-and-up) {
+  .hide-sm-and-up {
+    display: none;
+  }
+}
+
+
+// BREAKPOINT XS
 @include breakpoint(xs) {
-    .hide-xs {
-        display: none;
-    }
+  .hide-xs {
+    display: none;
+  }
 }

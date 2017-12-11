@@ -1,9 +1,10 @@
 /*------------------------------------*\
     ATOMS
-    
+
     small single interface elements,
     no nesting of atoms
 \*------------------------------------*/
+
 
 /**
     Kleinste Einheit von Elementen mit Klassen. Klassennamen zusammengeschrieben, am besten kurze Wörter
