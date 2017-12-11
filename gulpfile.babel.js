@@ -311,7 +311,7 @@ const watch = () => {
       `${paths.scripts.src}/modules/*.js`,
       `${paths.scripts.src}/base/*.js`
     ],
-    gulp.series(gulp.parallel(scripts_main, scripts_libs), reload)
+    gulp.series(gulp.parallel(scripts_main_dev, scripts_libs), reload)
   );
 };
 
