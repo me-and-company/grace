@@ -306,6 +306,7 @@ export function include() {
   TASKS
 */
 const watch = () => {
+  gulp.watch(`${paths.html.src}/**/*.html`, gulp.series(include, reload));
   gulp.watch(`${paths.styles.src}/**/*.scss`, gulp.series(styles, reload));
   gulp.watch([
       `${paths.scripts.src}/modules/*.js`,
