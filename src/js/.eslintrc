@@ -3,7 +3,11 @@
 
   "env": {
     "browser": true,
-    "node": true
+    "node": false
+  },
+
+  "globals": {
+    "$": false
   },
 
   "rules": {
