@@ -1,0 +1,14 @@
+.image,
+.inline-image {
+  width: width("images/2546747308_e5e6c30112_o.jpg", 2);
+  height: height("images/2546747308_e5e6c30112_o.jpg", 2);
+  background-size: 100%;
+}
+
+.image {
+  background-image: resolve('images/2546747308_e5e6c30112_o.jpg');
+}
+
+.inline-image {
+  background-image: inline('images/2546747308_e5e6c30112_o.jpg');
+}

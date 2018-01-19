@@ -3,6 +3,7 @@
 */
 import gulp from 'gulp';
 import sourcemaps from 'gulp-sourcemaps';
+import postcss from 'gulp-postcss';
 import sass from 'gulp-sass';
 import cssnano from 'gulp-cssnano';
 import autoprefixer from 'gulp-autoprefixer';
@@ -14,6 +15,8 @@ import imagemin from 'gulp-imagemin';
 import fileinclude from 'gulp-file-include';
 import notify from 'gulp-notify';
 import plumber from 'gulp-plumber';
+
+import assets from 'postcss-assets';
 
 import mozjpeg from 'imagemin-mozjpeg';
 import jpegtran from 'imagemin-jpegtran';
@@ -133,9 +136,29 @@ export function styles() {
         browsers: config.browsers,
         cascade: false
     }))
+    .pipe(postcss([assets({
+      basePath: 'dist/',
+      loadPaths: ['img/**/'],
+      cachebuster: true,
+    })]))
+    .pipe(sass())
     .pipe(cssnano())
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.styles.dest));
+}
+
+export function postcss_styles() {
+  return gulp.src([
+    `${paths.styles.dest}/*.css`,
+    `! ${paths.styles.dest}/*.map`
+  ], { sourcemaps: true })
+  .pipe(sourcemaps.init())
+  .pipe(postcss([assets({
+    loadPaths: [paths.images.dest],
+    cachebuster: true
+  })]))
+  .pipe(sourcemaps.write('./'))
+  .pipe(gulp.dest(paths.styles.dest));
 }
 
 // Javascript
@@ -327,8 +350,8 @@ export { dev };
 
 const build = gulp.series(
   include,
-  gulp.parallel(html, styles, scripts),
   images,
-  icons
+  icons,
+  gulp.parallel(html, styles, scripts),
 );
 export { build };
