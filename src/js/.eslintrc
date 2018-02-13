@@ -1,0 +1,28 @@
+{
+  "extends": "airbnb-base",
+
+  "env": {
+    "browser": true,
+    "node": false
+  },
+
+  "globals": {
+    "$": false
+  },
+
+  "rules": {
+    // #1 next step setup dev&prod env VAR and switch then 0/2
+
+    // only warn for console & debugger -> used in dev env
+    // see #1
+    "no-console": 1,
+    "no-debugger": 1,
+
+    // allow unused arguments
+    // see #1
+    "no-unused-vars": ["warn", { "vars": "all", "args": "none", "ignoreRestSiblings": true }],
+
+    // extend allows line length to 140 (from 100)
+    "max-len": ["error", 140, 2]
+  }
+}

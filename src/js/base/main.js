@@ -1,6 +1,4 @@
-(function($) {
-  'use strict';
+$(document).ready(() => {
+  // load modules, call functions, create objects ...
 
-  //load modules, call functions, create objects ...
-
-}(jQuery));
+});
