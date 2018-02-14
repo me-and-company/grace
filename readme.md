@@ -7,10 +7,9 @@ Essentially, it provides the folder structure and some basic files for SASS and 
 ## Installation
 
 1. Download or clone into your project folder
-2. Make postinstall.sh executable ``chmod +x postinstall.sh``
-3. Run ``npm install``
-4. As macOS user you need some extra steps for the images build process to work: [Install Homebrew](https://brew.sh/), then install libpng library with ``brew install libpng``
-5. Run ``gulp dev`` and you are ready to go
+2. Run ``npm install``
+3. As macOS user you need some extra steps for the images build process to work: [Install Homebrew](https://brew.sh/), then install libpng library with ``brew install libpng``
+4. Run ``gulp dev`` and you are ready to go
 
 
 ## Features
