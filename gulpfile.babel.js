@@ -53,8 +53,9 @@ const paths = {
 };
 
 const config = {
-  // see browserlist: http://browserl.ist/?q=last+4+versions%2C+not+ie+%3C%3D+10%2C+not+Edge+%3C%3D+13%2C+Safari+%3E%3D+8
-  browsers: ['last 4 versions', 'not ie <= 10', 'not Edge <= 13', 'Safari >= 8'],
+  // see browserlist: http://browserl.ist/
+  browsers: ['Safari >= 10.1', 'Firefox >= 60', 'Chrome >= 61', 'iOS >= 10.3', 'not IE <= 11', 'Edge >= 16'],
+  browsers_legacy: ['last 4 versions', '> 1%', 'not ie <= 10', 'not Edge <= 13', 'Safari >= 8', 'Firefox ESR'],
   svgo: {
     plugins: [
       {
@@ -80,7 +81,19 @@ config.babel = {
       "env",
       {
         "targets": {
-          "browsers": ["last 4 versions", "not ie <= 10", "not Edge <= 13", "Safari >= 8"]
+          "browsers": config.browsers
+        }
+      }
+    ]
+  ]
+}
+config.babel_legacy = {
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": config.browsers_legacy
         }
       }
     ]
@@ -134,7 +147,7 @@ export function styles() {
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(autoprefixer({
-        browsers: config.browsers,
+        browsers: config.browsers_legacy,
         cascade: false
     }))
     .pipe(cssnano())
