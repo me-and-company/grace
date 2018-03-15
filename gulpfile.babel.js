@@ -45,6 +45,10 @@ const paths = {
   images: {
     src: 'src/img',
     dest: 'dist/img/'
+  },
+  fonts: {
+    src: 'src/fonts',
+    dest: 'dist/fonts/'
   }
 };
 
@@ -214,11 +218,25 @@ export function html() {
     .pipe(gulp.dest(paths.html.dest));
 }
 
+// Includes
+export function include() {
+  return gulp.src([
+    `${paths.html.src}/**/*.html`,
+
+    `!${paths.html.src}/snippets/*.html`
+  ])
+  .pipe(fileinclude({
+    prefix: '@@',
+    basepath: './'
+  }))
+  .pipe(gulp.dest(paths.html.dest))
+}
+
 
 // Images
-export function deleteImages(done) {
+export function delete_images(done) {
   del([`${paths.images.dest}**/*`, `!${paths.images.dest}**/unicorn.jpg`]).then((paths) => {
-    console.log('Deleted files and folders:\n', paths.join('\n'));
+    console.log('Deleted image files and folders:\n', paths.join('\n'));
     done();
   });
 }
@@ -278,7 +296,7 @@ export function icons(done) {
 }
 
 const images = gulp.series(
-  deleteImages,
+  delete_images,
   imagemin_compress,
   imagemin_highq,
   imagemin_lossless,
@@ -287,19 +305,23 @@ const images = gulp.series(
 export { images };
 
 
-// Includes
-export function include() {
-  return gulp.src([
-    `${paths.html.src}/**/*.html`,
-
-    `!${paths.html.src}/snippets/*.html`
-  ])
-  .pipe(fileinclude({
-    prefix: '@@',
-    basepath: './'
-  }))
-  .pipe(gulp.dest(paths.html.dest))
+// FONTS
+export function delete_fonts(done) {
+  del(`${paths.fonts.dest}**/*`).then((paths) => {
+    console.log('Deleted font files and folders:\n', paths.join('\n'));
+    done();
+  });
 }
+export function copy_fonts() {
+  return gulp.src(`${paths.fonts.src}/**/*`)
+  .pipe(gulp.dest(paths.fonts.dest));
+}
+
+const fonts = gulp.series(
+  delete_fonts,
+  copy_fonts
+);
+export { fonts }
 
 
 /*
@@ -314,11 +336,13 @@ const watch = () => {
     ],
     gulp.series(gulp.parallel(scripts_main_dev, scripts_libs), reload)
   );
+  gulp.watch(`${paths.fonts.src}/**/*`, gulp.series(fonts, reload));
 };
+export { watch };
 
 
 const dev = gulp.series(
-  gulp.parallel(html, styles, scripts_dev),
+  gulp.parallel(html, styles, scripts_dev, fonts),
   serve,
   watch
 );
@@ -327,7 +351,7 @@ export { dev };
 
 const build = gulp.series(
   include,
-  gulp.parallel(html, styles, scripts),
+  gulp.parallel(html, styles, scripts, fonts),
   images,
   icons
 );
