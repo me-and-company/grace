@@ -53,7 +53,7 @@ const paths = {
 
 const config = {
   // see browserlist: http://browserl.ist/
-  browsers: ['Safari >= 10.1', 'Firefox >= 56', 'Chrome >= 61', 'iOS >= 10.3', 'not IE <= 11', 'Edge >= 16'],
+  browsers: ['Safari >= 10.1', 'Firefox >= 60', 'Chrome >= 61', 'iOS >= 10.3', 'not IE <= 11', 'Edge >= 16'],
   browsers_legacy: ['last 4 versions', '> 1%', 'not ie <= 10', 'not Edge <= 13', 'Safari >= 8', 'Firefox ESR'],
   svgo: {
     plugins: [
