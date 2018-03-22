@@ -235,7 +235,16 @@ export function scripts_main_dev_legacy() {
       `${paths.scripts.src}/base/*.js`
     ], { sourcemaps: true })
     .pipe(sourcemaps.init())
-    .pipe(babel(config.babel_legacy))
+    .pipe(
+      babel(Object.assign(
+        config.babel_legacy,
+        {
+          "presets": [
+            config.babel.presets[0]
+          ]
+        }
+      ))
+    )
     .pipe(concat('main.legacy.min.js'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.scripts.dest));
@@ -246,7 +255,16 @@ export function scripts_main_dev() {
       `${paths.scripts.src}/base/*.js`
     ], { sourcemaps: true })
     .pipe(sourcemaps.init())
-    .pipe(babel(config.babel))
+    .pipe(
+      babel(Object.assign(
+        config.babel,
+        {
+          "presets": [
+            config.babel.presets[0]
+          ]
+        }
+      ))
+    )
     .pipe(concat('main.min.js'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.scripts.dest));
