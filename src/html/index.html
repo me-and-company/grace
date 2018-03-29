@@ -20,6 +20,12 @@
         <link rel="stylesheet" href="css/style.css" media="all">
 
         <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.jss" media="all"></script><![endif]-->
+
+        <!--
+          Safari 10.1 supports modules, but does not support the `nomodule` attribute
+          https://gist.github.com/samthor/64b114e4a4f539915a95b91ffd340acc
+        -->
+        <script>(function(){var d=document;var c=d.createElement("script");if(!("noModule"in c)&&"onbeforeload"in c){var s=false;d.addEventListener("beforeload",function(e){if(e.target===c){s=true}else if(!e.target.hasAttribute("nomodule")||!s){return}e.preventDefault()},true);c.type="module";c.src=".";d.head.appendChild(c);c.remove()}})();</script>
     </head>
 
     <body>
@@ -36,8 +42,11 @@
         </footer>
 
         <!-- scripts -->
-        <script src="js/polyfill.js"></script>
         <script src="js/libs.js"></script>
-        <script src="js/main.min.js"></script>
+
+        <script type="module" src="js/main.min.js"></script>
+        <script nomodule src="js/main.legacy.min.js"></script>
+
+        <script nomodule src="js/polyfill.js"></script>
     </body>
 </html>
