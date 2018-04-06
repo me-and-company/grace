@@ -1,4 +1,5 @@
-# Web Project Kit
+# Grace
+## Web Frontend Fundament
 
 We at [Me & Company](https://me-company.de) are using this boilerplate project to set up our web projects. It unifies the structure of each project and simplifies the start of development.
 
