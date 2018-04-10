@@ -2,5 +2,4 @@ node_modules/
 
 dist/
 
-src/js/libs/first/jquery.js
 src/js/singles/polyfill.js
