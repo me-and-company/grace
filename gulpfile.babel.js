@@ -23,6 +23,7 @@ import browserSync from 'browser-sync';
 import del from 'del';
 
 import iconsToStrings from './scripts/generate-icons-list.js';
+import bustingFiles from './scripts/busting-files.js';
 
 
 /*
@@ -153,7 +154,14 @@ function serve(done) {
 */
 
 // Styles
-export function styles() {
+export function deleteStylesheets(done) {
+  del([`${paths.styles.dest}**/*`, `!${paths.styles.dest}**/unicorn.js`]).then((paths) => {
+    console.log('Deleted files and folders:\n', paths.join('\n'));
+    done();
+  });
+}
+
+export function generateStylesheets() {
   return gulp.src(`${paths.styles.src}/*.scss`)
     .pipe(sourcemaps.init())
     .pipe(sass())
@@ -165,6 +173,13 @@ export function styles() {
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.styles.dest));
 }
+
+const styles = gulp.series(
+  deleteStylesheets,
+  generateStylesheets
+);
+export { styles };
+
 
 // Javascript
 export function deleteScripts(done) {
@@ -294,6 +309,13 @@ export function html() {
   return gulp.src(`${paths.html.dest}/**/*.html`)
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest(paths.html.dest));
+}
+
+// Busting Filenames
+export function bustingFilenames(done) {
+  bustingFiles().then(() => {
+  });
+  done();
 }
 
 // Includes
@@ -430,6 +452,7 @@ export { dev };
 const build = gulp.series(
   include,
   gulp.parallel(html, styles, scripts, fonts),
+  bustingFilenames,
   images,
   icons
 );
