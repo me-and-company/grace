@@ -1,28 +1,47 @@
 const fs = require('fs');
+const { join } = require('path');
 const md5 = require('MD5');
 
 const cssPath = './dist/css';
 const jsPath = './dist/js';
 const htmlPath = './dist';
 
-let htmlFiles;
+const htmlFiles = [];
 
+const isDirectory = path => fs.lstatSync(path).isDirectory();
+const getDirectories = path => fs.readdirSync(path).map(name => join(path, name)).filter(isDirectory);
 
-const getHTMLfiles = function() {
-  const htmlFiles = [];
+const getAllDirectories = (dir, allDirs = []) => {
+  return new Promise((resolve, reject) => {
+    const dirs = getDirectories(dir);
+    if (dirs.length === 0) resolve(allDirs);
+    else {
+      allDirs = allDirs.concat(dirs);
+      dirs.forEach((subdir) => {
+        getAllDirectories(subdir, allDirs);
+      });
+    }
+  });
+}
 
+const getHTMLfiles = function(path) {
   return new Promise((resolve) => {
     let i = 0;
-    fs.readdir(htmlPath, function(err, files) {
+    fs.readdir(path, (err, files) => {
       files.forEach((file, index) => {
-        const extPos = file.search(/\.[^.\s]{3,15}$/);
-        const ext = file.slice(extPos + 1);
-        if (ext === 'html') {
-          htmlFiles.push(file);
-        }
+        fs.stat(`${path}/${file}`, (err, stat) => {
+          if (stat && stat.isDirectory()) getHTMLfiles(`${path}/${file}`);
+          else {
+            const extPos = file.search(/\.[^.\s]{3,4}$/);
+            const ext = file.slice(extPos + 1);
+            if (ext === 'html' || ext === 'htm') {
+              htmlFiles.push(file);
+            }
+          }
+        });
 
         i += 1;
-        if (i === files.length) resolve(htmlFiles);
+        if (i === files.length) resolve();
       });
     });
   });
@@ -127,15 +146,15 @@ const getFileHash = function(file) {
   return hash;
 }
 
-export default function() {
-  return new Promise((resolve) => {
-    getHTMLfiles().then((files) => {
-      htmlFiles = files;
-      collectFiles(cssPath, 'css').then((files) => {
-        cacheBustingCSS(files).then(() => {
-          collectFiles(jsPath, 'js').then(files => cacheBustingJS(files));
-        });
-      });
-    }).catch(error => console.log(error));
-  });
-}
+// export default function() {
+  const allDirectories = getAllDirectories(htmlPath).then(subdirs => console.log(subdirs));
+  // return new Promise((resolve) => {
+  //   getHTMLfiles(htmlPath).then(() => {
+  //     collectFiles(cssPath, 'css').then((files) => {
+  //       cacheBustingCSS(files).then(() => {
+  //         collectFiles(jsPath, 'js').then(files => cacheBustingJS(files));
+  //       });
+  //     });
+  //   }).catch(error => console.log(error));
+  // });
+// }
