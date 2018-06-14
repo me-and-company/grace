@@ -9,20 +9,6 @@ const htmlPath = './dist';
 let htmlFiles = [];
 
 const isDirectory = path => fs.lstatSync(path).isDirectory();
-const getDirectories = path => fs.readdirSync(path).map(name => join(path, name)).filter(isDirectory);
-
-const getAllDirectories = (dir, allDirs = []) => {
-  return new Promise((resolve, reject) => {
-    const dirs = getDirectories(dir);
-    if (dirs.length === 0) resolve(allDirs);
-    else {
-      allDirs = allDirs.concat(dirs);
-      dirs.forEach((subdir) => {
-        getAllDirectories(subdir, allDirs);
-      });
-    }
-  });
-}
 
 const walk = (dir, done) => {
   let results = [];
@@ -70,24 +56,18 @@ const getAllHTMLFiles = (dirs) => {
   });
 }
 
-const collectCSSFiles = function() {
-  return new Promise((resolve) => {
-    const cssFiles = collectFiles(cssPath, 'css')
-    .then(files => resolve(files));
-  });
-}
-
-const collectFiles = function(path, filesExt) {
+const collectFiles = function(filepath, filesExt) {
   const collectedFiles = [];
 
   return new Promise((resolve) => {
-    fs.readdir(path, function(err, files) {
+    fs.readdir(filepath, function(err, files) {
       let i = 0;
       files.forEach((file, index) => {
         const extPos = file.search(/\.[^.\s]{1,15}$/);
         const ext = file.slice(extPos + 1);
         if (ext === filesExt) {
-          collectedFiles.push(file);
+          const hash = getFileHash(path.join(filepath, file));
+          collectedFiles.push({ file, hash });
         }
 
         i += 1;
@@ -102,7 +82,6 @@ const collectFiles = function(path, filesExt) {
 const cacheBustingCSS = function(cssFiles) {
   return new Promise((resolve) => {
     htmlFiles.forEach((htmlFile) => {
-      console.log(`${htmlFile}`);
       fs.readFile(`${htmlFile}`, "utf8", (err, data) => {
         const html = getCSSBustingHTML(cssFiles, 0, data);
         fs.writeFile(`${htmlFile}`, html, 'utf8', (err) => {
@@ -116,16 +95,17 @@ const cacheBustingCSS = function(cssFiles) {
 }
 
 const getCSSBustingHTML = function(cssFiles, index, html) {
-  const cssFile = cssFiles[index];
-  const hash = getFileHash(`${cssPath}/${cssFile}`);
+  const cssFile = cssFiles[index].file;
   const regex = new RegExp(`<link.*(${cssFile}).*>`, 'gm');
   const regexMatch = html.match(regex);
   if (regexMatch) {
     const match = regexMatch[0];
     const filename = cssFile.split('.css');
-    const newString = match.replace(cssFile, `${filename[0]}.${hash}.css`);
+    const newString = match.replace(cssFile, `${filename[0]}.${cssFiles[index].hash}.css`);
     html = html.replace(regex, newString);
-    fs.renameSync(`${cssPath}/${cssFile}`, `${cssPath}/${filename[0]}.${hash}.css`);
+    if ( fs.existsSync(path.join(cssPath, cssFile)) ) {
+      fs.renameSync(`${cssPath}/${cssFile}`, `${cssPath}/${filename[0]}.${cssFiles[index].hash}.css`);
+    }
   }
 
   if (index < cssFiles.length - 1) return getCSSBustingHTML(cssFiles, index + 1, html);
@@ -133,16 +113,17 @@ const getCSSBustingHTML = function(cssFiles, index, html) {
 }
 
 const getJSBustingHTML = function(jsFiles, index, html) {
-  const jsFile = jsFiles[index];
-  const hash = getFileHash(`${jsPath}/${jsFile}`);
+  const jsFile = jsFiles[index].file;
   const regex = new RegExp(`<script.*(${jsFile}).*>`, 'gm');
   const regexMatch = html.match(regex);
   if (regexMatch) {
     const match = regexMatch[0];
     const filename = jsFile.split('.js');
-    const newString = match.replace(jsFile, `${filename[0]}.${hash}.js`);
+    const newString = match.replace(jsFile, `${filename[0]}.${jsFiles[index].hash}.js`);
     html = html.replace(regex, newString);
-    fs.renameSync(`${jsPath}/${jsFile}`, `${jsPath}/${filename[0]}.${hash}.js`);
+    if ( fs.existsSync(path.join(jsPath, jsFile)) ) {
+      fs.renameSync(`${jsPath}/${jsFile}`, `${jsPath}/${filename[0]}.${jsFiles[index].hash}.js`);
+    }
   }
 
   if (index < jsFiles.length - 1) return getJSBustingHTML(jsFiles, index + 1, html);
@@ -170,10 +151,10 @@ const getFileHash = function(file) {
   return hash;
 }
 
-//export default function() {
-  walk(htmlPath, (err, results) => getAllHTMLFiles(results).then((files) => {
-    htmlFiles = files;
-    return new Promise((resolve) => {
+export default function() {
+  return new Promise((resolve, reject) => {
+    walk(htmlPath, (err, results) => getAllHTMLFiles(results).then((files) => {
+      htmlFiles = files;
       collectFiles(cssPath, 'css').then((files) => {
         cacheBustingCSS(files).then(() => {
           collectFiles(jsPath, 'js')
@@ -181,6 +162,6 @@ const getFileHash = function(file) {
           .then(() => resolve());
         });
       });
-    });
-  }));
-//}
+    }));
+  });
+}
