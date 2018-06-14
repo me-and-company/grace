@@ -6,6 +6,8 @@ const cssPath = './dist/css';
 const jsPath = './dist/js';
 const htmlPath = './dist';
 
+let htmlFiles = [];
+
 const isDirectory = path => fs.lstatSync(path).isDirectory();
 const getDirectories = path => fs.readdirSync(path).map(name => join(path, name)).filter(isDirectory);
 
@@ -47,31 +49,7 @@ const walk = (dir, done) => {
   });
 }
 
-const getHTMLfiles = function(path) {
-  return new Promise((resolve) => {
-    let i = 0;
-    fs.readdir(path, (err, files) => {
-      files.forEach((file, index) => {
-        fs.stat(`${path}/${file}`, (err, stat) => {
-          if (stat && stat.isDirectory()) getHTMLfiles(`${path}/${file}`);
-          else {
-            const extPos = file.search(/\.[^.\s]{3,4}$/);
-            const ext = file.slice(extPos + 1);
-            if (ext === 'html' || ext === 'htm') {
-              htmlFiles.push(file);
-            }
-          }
-        });
-
-        i += 1;
-        if (i === files.length) resolve();
-      });
-    });
-  });
-}
-
 const getAllHTMLFiles = (dirs) => {
-  console.log(dirs);
   return new Promise((resolve) => {
     const htmlFiles = [];
 
@@ -82,7 +60,7 @@ const getAllHTMLFiles = (dirs) => {
           const extPos = file.search(/\.[^.\s]{3,4}$/);
           const ext = file.slice(extPos + 1);
           if (ext === 'html' || ext === 'htm') {
-            htmlFiles.push(file);
+            if ( !htmlFiles.includes(path.join(dir, file)) ) htmlFiles.push(path.join(dir, file));
           }
         }
       });
@@ -124,9 +102,10 @@ const collectFiles = function(path, filesExt) {
 const cacheBustingCSS = function(cssFiles) {
   return new Promise((resolve) => {
     htmlFiles.forEach((htmlFile) => {
-      fs.readFile(`${htmlPath}/${htmlFile}`, "utf8", (err, data) => {
+      console.log(`${htmlFile}`);
+      fs.readFile(`${htmlFile}`, "utf8", (err, data) => {
         const html = getCSSBustingHTML(cssFiles, 0, data);
-        fs.writeFile(`${htmlPath}/${htmlFile}`, html, 'utf8', (err) => {
+        fs.writeFile(`${htmlFile}`, html, 'utf8', (err) => {
           if (err) throw err;
           resolve();
           console.log(`${htmlFile} updated with css cachebusting file names`);
@@ -173,9 +152,9 @@ const getJSBustingHTML = function(jsFiles, index, html) {
 const cacheBustingJS = function(jsFiles) {
   return new Promise((resolve) => {
     htmlFiles.forEach((htmlFile) => {
-      fs.readFile(`${htmlPath}/${htmlFile}`, "utf8", (err, data) => {
+      fs.readFile(`${htmlFile}`, "utf8", (err, data) => {
         const html = getJSBustingHTML(jsFiles, 0, data);
-        fs.writeFile(`${htmlPath}/${htmlFile}`, html, 'utf8', (err) => {
+        fs.writeFile(`${htmlFile}`, html, 'utf8', (err) => {
           if (err) throw err;
           resolve();
           console.log(`${htmlFile} updated with js cachebusting file names`);
@@ -191,16 +170,17 @@ const getFileHash = function(file) {
   return hash;
 }
 
-// export default function() {
-  // const allDirectories = getAllDirectories(htmlPath).then(subdirs => console.log(subdirs));
-  walk(htmlPath, (err, results) => getAllHTMLFiles(results).then(files => console.log(files)));
-  // return new Promise((resolve) => {
-  //   getHTMLfiles(htmlPath).then(() => {
-  //     collectFiles(cssPath, 'css').then((files) => {
-  //       cacheBustingCSS(files).then(() => {
-  //         collectFiles(jsPath, 'js').then(files => cacheBustingJS(files));
-  //       });
-  //     });
-  //   }).catch(error => console.log(error));
-  // });
-// }
+//export default function() {
+  walk(htmlPath, (err, results) => getAllHTMLFiles(results).then((files) => {
+    htmlFiles = files;
+    return new Promise((resolve) => {
+      collectFiles(cssPath, 'css').then((files) => {
+        cacheBustingCSS(files).then(() => {
+          collectFiles(jsPath, 'js')
+          .then(files => cacheBustingJS(files))
+          .then(() => resolve());
+        });
+      });
+    });
+  }));
+//}

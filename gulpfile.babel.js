@@ -452,7 +452,7 @@ export { dev };
 const build = gulp.series(
   include,
   gulp.parallel(html, styles, scripts, fonts),
-  bustingFilenames,
+  // bustingFilenames,
   images,
   icons
 );
