@@ -1,12 +1,10 @@
 const fs = require('fs');
-const { join } = require('path');
+const path = require('path');
 const md5 = require('MD5');
 
 const cssPath = './dist/css';
 const jsPath = './dist/js';
 const htmlPath = './dist';
-
-const htmlFiles = [];
 
 const isDirectory = path => fs.lstatSync(path).isDirectory();
 const getDirectories = path => fs.readdirSync(path).map(name => join(path, name)).filter(isDirectory);
@@ -21,6 +19,31 @@ const getAllDirectories = (dir, allDirs = []) => {
         getAllDirectories(subdir, allDirs);
       });
     }
+  });
+}
+
+const walk = (dir, done) => {
+  let results = [];
+  fs.readdir(dir, (err, list) => {
+    if (err) return done(err);
+    let i = 0;
+    (function next() {
+      let file = list[i++];
+      if (!file) {
+        if (!results.includes(dir)) results = results.concat(dir);
+        return done(null, results);
+      }
+      file = path.resolve(dir, file);
+      fs.stat(file, (err, stat) => {
+        if (stat && stat.isDirectory()) {
+          results.push(file);
+          walk(file, (err, res) => {
+            results = results.concat(res);
+            next();
+          });
+        } else next();
+      });
+    })();
   });
 }
 
@@ -44,6 +67,28 @@ const getHTMLfiles = function(path) {
         if (i === files.length) resolve();
       });
     });
+  });
+}
+
+const getAllHTMLFiles = (dirs) => {
+  console.log(dirs);
+  return new Promise((resolve) => {
+    const htmlFiles = [];
+
+    dirs.forEach((dir) => {
+      const files = fs.readdirSync(dir);
+      files.forEach((file, index) => {
+        if (!isDirectory(path.resolve(dir, file))) {
+          const extPos = file.search(/\.[^.\s]{3,4}$/);
+          const ext = file.slice(extPos + 1);
+          if (ext === 'html' || ext === 'htm') {
+            htmlFiles.push(file);
+          }
+        }
+      });
+    });
+
+    resolve(htmlFiles);
   });
 }
 
@@ -147,7 +192,8 @@ const getFileHash = function(file) {
 }
 
 // export default function() {
-  const allDirectories = getAllDirectories(htmlPath).then(subdirs => console.log(subdirs));
+  // const allDirectories = getAllDirectories(htmlPath).then(subdirs => console.log(subdirs));
+  walk(htmlPath, (err, results) => getAllHTMLFiles(results).then(files => console.log(files)));
   // return new Promise((resolve) => {
   //   getHTMLfiles(htmlPath).then(() => {
   //     collectFiles(cssPath, 'css').then((files) => {
