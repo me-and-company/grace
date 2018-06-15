@@ -1,10 +1,10 @@
 /*------------------------------------*\
-    BASE
-    
+    NATIVES
+
     unclassed HTML Elements
 \*------------------------------------*/
 
 /**
-    Standard Styles für HTML Elemente. Keine Klassen.
-    -> nur standard styles, einfach zu überschreiben
+    Standard Styles für HTML Elemente.
+    Keine Klassen. Keine Verschachtelungen.
 **/
