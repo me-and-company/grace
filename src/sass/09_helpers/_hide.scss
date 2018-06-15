@@ -1,15 +1,3 @@
-.hide {
-  display: none;
-}
-
-.hidden {
-  height: 0;
-  width: 0;
-  display: inline-block;
-  visibility: hidden;
-}
-
-
 // BREAKPOINT LG
 @include breakpoint(lg) {
   .hide-lg {
