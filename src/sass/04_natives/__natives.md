@@ -1,10 +1,10 @@
 /*------------------------------------*\
-    NATIVES
+  NATIVES
 
-    unclassed HTML Elements
+  unclassed HTML Elements
 \*------------------------------------*/
 
 /**
-    Standard Styles für HTML Elemente.
-    Keine Klassen. Keine Verschachtelungen.
+  Standard Styles für HTML Elemente.
+  Keine Klassen. Keine Verschachtelungen.
 **/
