@@ -1,10 +1,10 @@
 /*------------------------------------*\
-    HELPERS
-    
-    helpers & overrides
+  HELPERS
+
+  helpers & overrides
 \*------------------------------------*/
 
 
 /**
-    Hilfsklassen für zB Abstände, Textfluss, hide Klassen
+  Hilfsklassen für zB Abstände, Textfluss, hide Klassen
 **/

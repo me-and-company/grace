@@ -1,11 +1,11 @@
 /*------------------------------------*\
-    ELEMENTS
-    
-    designed elements
+  ELEMENTS
+
+  designed elements
 \*------------------------------------*/
 
 /**
-    Gestaltete Elemente, welche auch andere atome oder weitere HTML-Elemente beinhalten können.
+  Gestaltete Elemente, welche auch andere atome oder weitere HTML-Elemente beinhalten können.
 
-    zB .input-field mit Inputfeld und Label
+  zB .input-field mit Inputfeld und Label
 **/

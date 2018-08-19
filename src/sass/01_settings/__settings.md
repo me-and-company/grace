@@ -1,9 +1,9 @@
 /*------------------------------------*\
-    SETTINGS
-    
-    global vars, config
+  SETTINGS
+
+  global vars, config
 \*------------------------------------*/
 
 /**
-    Definition von globalen Variablen
+  Definition von globalen Variablen
 **/

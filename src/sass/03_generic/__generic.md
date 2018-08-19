@@ -1,10 +1,10 @@
 /*------------------------------------*\
-    GENERIC
+  GENERIC
 
-    normalize, resets
+  normalize, resets
 \*------------------------------------*/
 
 
 /**
-    normalize css, globale definitionen (zB box-sizing, grid)
+  normalize css, globale definitionen (zB box-sizing, grid)
 **/
