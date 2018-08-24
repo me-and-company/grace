@@ -190,6 +190,7 @@ export function scripts_singles() {
 
 export function scripts_main_legacy() {
   return gulp.src([
+      `${paths.scripts.src}/functions/*.js`,
       `${paths.scripts.src}/modules/*.js`,
       `${paths.scripts.src}/base/*.js`
     ], { sourcemaps: true })
@@ -210,6 +211,7 @@ export function scripts_main_legacy() {
 }
 export function scripts_main() {
   return gulp.src([
+      `${paths.scripts.src}/functions/*.js`,
       `${paths.scripts.src}/modules/*.js`,
       `${paths.scripts.src}/base/*.js`
     ], { sourcemaps: true })
@@ -231,6 +233,7 @@ export function scripts_main() {
 
 export function scripts_main_dev_legacy() {
   return gulp.src([
+      `${paths.scripts.src}/functions/*.js`,
       `${paths.scripts.src}/modules/*.js`,
       `${paths.scripts.src}/base/*.js`
     ], { sourcemaps: true })
@@ -251,6 +254,7 @@ export function scripts_main_dev_legacy() {
 }
 export function scripts_main_dev() {
   return gulp.src([
+      `${paths.scripts.src}/functions/*.js`,
       `${paths.scripts.src}/modules/*.js`,
       `${paths.scripts.src}/base/*.js`
     ], { sourcemaps: true })
