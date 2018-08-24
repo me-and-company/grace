@@ -291,7 +291,7 @@ export { scripts_dev };
 
 // HTML
 export function html() {
-  return gulp.src(`${paths.html.dest}/**/*.html`)
+  return gulp.src(`${paths.html.src}/**/*.html`)
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest(paths.html.dest));
 }
