@@ -1,6 +1,3 @@
-(function($) {
-  'use strict';
-
-  //bind global events
-
-}(jQuery));
+(function () {
+  // bind global events
+}());

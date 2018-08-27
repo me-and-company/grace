@@ -243,7 +243,7 @@ export function scripts_main_dev_legacy() {
         config.babel_legacy,
         {
           "presets": [
-            config.babel.presets[0]
+            config.babel_legacy.presets[0]
           ]
         }
       ))
@@ -413,6 +413,7 @@ const watch = () => {
   gulp.watch(`${paths.html.src}/**/*.html`, gulp.series(include, reload));
   gulp.watch(`${paths.styles.src}/**/*.scss`, gulp.series(styles, reload));
   gulp.watch([
+      `${paths.scripts.src}/functions/*.js`,
       `${paths.scripts.src}/modules/*.js`,
       `${paths.scripts.src}/base/*.js`
     ],
