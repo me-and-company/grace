@@ -7,9 +7,9 @@
   object-fit: cover;
   width: 100%;
   height: auto;
-  padding: $baseline $base-spacing;
+  padding: text-spacing(s) spacing(s);
   border: 1px solid black;
-  margin-bottom: $baseline;
+  margin-bottom: text-spacing(s);
 
   overflow: hidden;
   display: block;
