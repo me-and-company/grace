@@ -1,19 +1,10 @@
-/*------------------------------------*\
-  VARS
-
-  basic vars
-\*------------------------------------*/
+/*
+** BASICS
+*/
 
 $base-line-height: 1.5;
 $base-font-family: $primary-font-family;
 $base-letter-spacing: 1.3px;
-
-
-/*------------------------------------*\
-  SIZING & SPACING
-
-
-\*------------------------------------*/
 
 /*
 ** PAGE SIZES
@@ -21,21 +12,12 @@ $base-letter-spacing: 1.3px;
 
 $page-max-size: 920px;
 
-
 /*
-** SPACING RHYTHM
+** USE VARS (decide what settings to use)
 */
 
 $base-spacing: 4px;
 $baseline: $base-line-height * 1rem;
-
-
-/*------------------------------------*\
-  USE VARS
-
-  define what do you want to use
-\*------------------------------------*/
-
 $use-spacing-helpers: true;
 $use-spacing-helpers-responsive: false;
 
