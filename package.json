@@ -9,11 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/mecompany/startertkit.git"
+    "url": "git+ssh://git@github.com:wumble/grace.git"
   },
-  "author": "mecompany",
-  "license": "ISC",
-  "homepage": "https://bitbucket.org/mecompany/startertkit#readme",
+  "author": "Manuel Bartels",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-minify": "^0.3.0",
