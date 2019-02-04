@@ -1,4 +1,4 @@
-export default function() {
+function iconsToStrings () {
   return new Promise((resolve, reject) => {
     const fs = require('fs');
 
@@ -29,3 +29,5 @@ export default function() {
     });
   });
 }
+
+module.exports = iconsToStrings;

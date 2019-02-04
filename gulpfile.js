@@ -1,28 +1,28 @@
 /*
     IMPORTS
 */
-import gulp from 'gulp';
-import sourcemaps from 'gulp-sourcemaps';
-import sass from 'gulp-sass';
-import cssnano from 'gulp-cssnano';
-import autoprefixer from 'gulp-autoprefixer';
-import concat from 'gulp-concat';
-import babel from 'gulp-babel';
-import htmlmin from 'gulp-htmlmin';
-import imagemin from 'gulp-imagemin';
-import fileinclude from 'gulp-file-include';
-import notify from 'gulp-notify';
-import plumber from 'gulp-plumber';
+const gulp = require('gulp');
+const sourcemaps = require('gulp-sourcemaps');
+const sass = require('gulp-sass');
+const cssnano = require('gulp-cssnano');
+const autoprefixer = require('gulp-autoprefixer');
+const concat = require('gulp-concat');
+const babel = require('gulp-babel');
+const htmlmin = require('gulp-htmlmin');
+const imagemin = require('gulp-imagemin');
+const fileinclude = require('gulp-file-include');
+const notify = require('gulp-notify');
+const plumber = require('gulp-plumber');
 
-import mozjpeg from 'imagemin-mozjpeg';
-import jpegtran from 'imagemin-jpegtran';
-import pngquant from 'imagemin-pngquant';
-import svgo from 'imagemin-svgo';
+const mozjpeg = require('imagemin-mozjpeg');
+const jpegtran = require('imagemin-jpegtran');
+const pngquant = require('imagemin-pngquant');
+const svgo = require('imagemin-svgo');
 
-import browserSync from 'browser-sync';
-import del from 'del';
+const browserSync = require('browser-sync');
+const del = require('del');
 
-import iconsToStrings from './scripts/generate-icons-list.js';
+const iconsToStrings = require('./scripts/generate-icons-list.js');
 
 
 /*
@@ -78,10 +78,10 @@ config.babel = {
   "babelrc": false,
   "presets": [
     [
-      "env",
+      "@babel/env",
       {
         modules: false,
-        useBuiltIns: true,
+        useBuiltIns: false,
         "targets": {
           "browsers": config.browsers
         }
@@ -96,7 +96,7 @@ config.babel_legacy = {
   "babelrc": false,
   "presets": [
     [
-      "env",
+      "@babel/env",
       {
         modules: false,
         useBuiltIns: false,
@@ -153,7 +153,7 @@ function serve(done) {
 */
 
 // Styles
-export function styles() {
+function styles() {
   return gulp.src(`${paths.styles.src}/*.scss`)
     .pipe(sourcemaps.init())
     .pipe(sass())
@@ -165,16 +165,17 @@ export function styles() {
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.styles.dest));
 }
+exports.styles = styles;
 
 // Javascript
-export function deleteScripts(done) {
+function deleteScripts(done) {
   del([`${paths.scripts.dest}**/*`, `!${paths.scripts.dest}**/unicorn.js`]).then((paths) => {
     console.log('Deleted files and folders:\n', paths.join('\n'));
     done();
   });
 }
 
-export function scripts_libs() {
+function scripts_libs() {
   return gulp.src([
       `${paths.scripts.src}/libs/first/*.js`,
       `${paths.scripts.src}/libs/*.js`
@@ -183,12 +184,12 @@ export function scripts_libs() {
     .pipe(gulp.dest(paths.scripts.dest));
 }
 
-export function scripts_singles() {
+function scripts_singles() {
   return gulp.src([`${paths.scripts.src}/singles/**/*.js`])
     .pipe(gulp.dest(paths.scripts.dest));
 }
 
-export function scripts_main_legacy() {
+function scripts_main_legacy() {
   return gulp.src([
       `${paths.scripts.src}/functions/*.js`,
       `${paths.scripts.src}/modules/*.js`,
@@ -209,7 +210,7 @@ export function scripts_main_legacy() {
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.scripts.dest));
 }
-export function scripts_main() {
+function scripts_main() {
   return gulp.src([
       `${paths.scripts.src}/functions/*.js`,
       `${paths.scripts.src}/modules/*.js`,
@@ -231,7 +232,7 @@ export function scripts_main() {
     .pipe(gulp.dest(paths.scripts.dest));
 }
 
-export function scripts_main_dev_legacy() {
+function scripts_main_dev_legacy() {
   return gulp.src([
       `${paths.scripts.src}/functions/*.js`,
       `${paths.scripts.src}/modules/*.js`,
@@ -252,7 +253,7 @@ export function scripts_main_dev_legacy() {
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.scripts.dest));
 }
-export function scripts_main_dev() {
+function scripts_main_dev() {
   return gulp.src([
       `${paths.scripts.src}/functions/*.js`,
       `${paths.scripts.src}/modules/*.js`,
@@ -281,7 +282,7 @@ const scripts = gulp.series(
   scripts_main_legacy,
   scripts_main
 );
-export { scripts };
+exports.scripts = scripts;
 
 const scripts_dev = gulp.series(
   deleteScripts,
@@ -290,18 +291,18 @@ const scripts_dev = gulp.series(
   scripts_main_dev_legacy,
   scripts_main_dev
 );
-export { scripts_dev };
+exports.scripts_dev = scripts_dev;
 
 
 // HTML
-export function html() {
+function html() {
   return gulp.src(`${paths.html.src}/**/*.html`)
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest(paths.html.dest));
 }
 
 // Includes
-export function include() {
+function include() {
   return gulp.src([
     `${paths.html.src}/**/*.html`,
 
@@ -316,14 +317,14 @@ export function include() {
 
 
 // Images
-export function delete_images(done) {
+function delete_images(done) {
   del([`${paths.images.dest}**/*`, `!${paths.images.dest}**/unicorn.jpg`]).then((paths) => {
     console.log('Deleted image files and folders:\n', paths.join('\n'));
     done();
   });
 }
 
-export function imagemin_compress() {
+function imagemin_compress() {
   return gulp.src([
       `${paths.images.src}/**/*`,
       `${paths.images.src}/icons/**/*`,
@@ -341,7 +342,7 @@ export function imagemin_compress() {
     .pipe(gulp.dest(paths.images.dest))
 }
 
-export function imagemin_highq() {
+function imagemin_highq() {
   return gulp.src([
     `${paths.images.src}/_highq/**/*`,
 
@@ -355,7 +356,7 @@ export function imagemin_highq() {
   .pipe(gulp.dest(`${paths.images.dest}_highq`))
 }
 
-export function imagemin_lossless() {
+function imagemin_lossless() {
   return gulp.src([
     `${paths.images.src}/_lossless/**/*`,
 
@@ -370,7 +371,7 @@ export function imagemin_lossless() {
 }
 
 // Icons to Strings
-export function icons(done) {
+function icons(done) {
   iconsToStrings().then(() => {
     console.log('is done');
     done();
@@ -384,17 +385,17 @@ const images = gulp.series(
   imagemin_lossless,
   icons,
 );
-export { images };
+exports.images = images;
 
 
 // FONTS
-export function delete_fonts(done) {
+function delete_fonts(done) {
   del(`${paths.fonts.dest}**/*`).then((paths) => {
     console.log('Deleted font files and folders:\n', paths.join('\n'));
     done();
   });
 }
-export function copy_fonts() {
+function copy_fonts() {
   return gulp.src(`${paths.fonts.src}/**/*`)
   .pipe(gulp.dest(paths.fonts.dest));
 }
@@ -403,7 +404,7 @@ const fonts = gulp.series(
   delete_fonts,
   copy_fonts
 );
-export { fonts }
+exports.fonts = fonts;
 
 
 /*
@@ -421,7 +422,7 @@ const watch = () => {
   );
   gulp.watch(`${paths.fonts.src}/**/*`, gulp.series(fonts, reload));
 };
-export { watch };
+exports.watch = watch;
 
 
 const dev = gulp.series(
@@ -429,7 +430,7 @@ const dev = gulp.series(
   serve,
   watch
 );
-export { dev };
+exports.dev = dev;
 
 
 const build = gulp.series(
@@ -438,4 +439,4 @@ const build = gulp.series(
   images,
   icons
 );
-export { build };
+exports.default = build;

@@ -11,7 +11,7 @@ fs.mkdir('./src/js/singles/', (err) => {
 });
 
 
-fs.copyFile('node_modules/babel-polyfill/dist/polyfill.min.js', './src/js/singles/polyfill.js', (err) => {
+fs.copyFile('node_modules/@babel/polyfill/dist/polyfill.min.js', './src/js/singles/polyfill.js', (err) => {
   if (err) throw err;
   console.log('babel-polyfill was copied to destination');
 });
