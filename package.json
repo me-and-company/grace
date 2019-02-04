@@ -1,5 +1,5 @@
 {
-  "name": "startertkit",
+  "name": "grace",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:wumble/grace.git"
+    "url": "git+ssh://git@github.com:me-and-company/grace.git"
   },
-  "author": "Manuel Bartels",
+  "author": "Me & Company",
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
