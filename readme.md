@@ -71,9 +71,29 @@ Instead of creating a variation of an element or atom class for unique styling c
 * see [helpers](/src/sass/09_helpers) for more
 
 ### 3. JavaScript
+
+#### Linting
+To improve code quality and consistency we follow the [Airbnb Javascript Style Guide](https://github.com/airbnb/javascript). We use ESLint with the Airbnb config to comply with the style guide ([ESLint config](https://github.com/me-and-company/grace/blob/master/src/js/.eslintrc)). To enable linting, check the preferences of your editor.
+
+#### Module Classes
+Our basic approach is to get as close as possible to [Object Oriented Programming with JavaScript](https://developer.mozilla.org/de/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript). For each module, create a class which implements the needed functionality. The [Class Template](https://github.com/me-and-company/grace/blob/master/src/js/modules/_template.js) defines a basic structure. The class constructor expects a [Node Object](https://developer.mozilla.org/en-US/docs/Web/API/Node) as element. Optionally, further parameters can be provided. 
+
+#### Main
+This is the main script from where all functions should be called and all classes should be created. Use the [factory functions](https://github.com/me-and-company/grace/blob/master/src/js/functions/factory.js) to create instances of your classes. See [main.js](https://github.com/me-and-company/grace/blob/master/src/js/base/main.js) how to use them.
+* The graceProduce function produces many instance of the class. For each Node with the given selector, an instance of the class is created. So each Node has its own class instance.
+* The graceCreate function creates one instance of the class. The element is an Array of each Node with the given selector.
+
+#### Events, Functions and Libraries
+* You should add global event listeners inside the [events.js](https://github.com/me-and-company/grace/blob/master/src/js/base/events.js) file. Global events are not related to a module, like sending a Google Analytics event triggered by every button on the page.
+* If you are writing global functions, the folder [functions](https://github.com/me-and-company/grace/tree/master/src/js/functions) is the right place. 
+* If you need to include 3rd party libraries, add them to the [libraries](https://github.com/me-and-company/grace/tree/master/src/js/libs) folder, and Gulp  bundles them into a libs.js file.
+
+#### Building
+* singles are processed as they are and are stored to the dist/js folder
+* libs get build into a libs.js, with the scripts inside the first folder being added at first
+* all other scripts get build into the main.js
 * support of EcmaScript6 via [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/)
-* included jQuery
-* ...more to come
+* additional browser support with the main.legacy.js
 
 ### 4. Inline SVG-Icons
 
