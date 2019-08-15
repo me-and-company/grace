@@ -1,0 +1,84 @@
+.icon {
+  vertical-align: middle;
+
+  img,
+  svg {
+    width: 1em;
+    height: 1em;
+
+    top: .15rem;
+    position: relative;
+  }
+
+  &.-inline {
+    img,
+    svg {
+      &, path {
+        fill: currentColor;
+      }
+    }
+  }
+
+  &.-is-left {
+    padding-right: .5em;
+  }
+
+  &.-is-right {
+    padding-left: .5em;
+  }
+
+  &.-rotate-90 {
+    svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  &.-rotate-180 {
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  &.-rotate-270 {
+    svg {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &[class*=-size-] {
+    display: inline-block;
+
+    img,
+    svg {
+      width: auto;
+      height: 100%;
+
+      top: 0;
+    }
+  }
+
+  &.-size-20 {
+    width: 20px;
+    height: 20px;
+  }
+
+  &.-size-32 {
+    width: 32px;
+    height: 32px;
+  }
+
+  &.-size-40 {
+    width: 40px;
+    height: 40px;
+  }
+
+  &.-size-64 {
+    width: 64px;
+    height: 64px;
+  }
+
+  &.-size-80 {
+    width: 80px;
+    height: 80px;
+  }
+}
