@@ -1,15 +1,54 @@
-$colors: (
-  base: (
-    base: rgb(14, 26, 42),
-    light: rgb(65, 208 ,255)
+$colorPool: (
+  blue: (
+    500: #009fe3,
+    600: #006bb3,
   ),
-  ambient: (
-    base: rgb(111, 142, 192),
-    dark: rgb(51, 62, 80)
+  green: (
+    500: #DDFF00,
+    600: #87C467,
   ),
-  brand: rgb(62, 187, 123),
-  warning: rgb(250, 40, 40),
-  error: rgb(217, 83, 79),
-  success: rgb(100, 255, 100),
-  info: rgb(246, 199, 36)
+  grey: (
+    100: #FFFFFF,
+    300: #FAFBFC,
+    400: #F4F5F7,
+    450: #EBECF0,
+    500: #DFE1E6,
+    550: #C1C7D0,
+    600: #A1A8B3,
+    700: #737880,
+    800: #45484D,
+    900: #0E1A2A,
+  ),
+  orange: (
+    500: #FF7A31,
+    600: #D36D35,
+  ),
+  purple: (
+    500: #9474FF,
+    600: #5960C1,
+  ),
+  red: (
+    500: #FF045F,
+    600: #AB3850,
+  ),
+  teal: (
+    500: #00FFA1,
+    600: #2FB79C,
+  ),
+  yellow: (
+    500: #FFD43E,
+    600: #E7BD2D,
+  ),
 );
+
+$colorNames: (
+  base: (
+    base: map_get(map_get($colorPool, grey), 900),
+  ),
+  brand: (
+    base: map_get(map_get($colorPool, blue), 500),
+    dark: map_get(map_get($colorPool, grey), 900),
+  )
+);
+
+$colors: map_merge($colorPool, $colorNames);

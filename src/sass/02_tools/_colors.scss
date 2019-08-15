@@ -1,13 +1,13 @@
-@function color($color, $tone: 'base') {
+@function color($color, $tone: 'base', $alpha: 1) {
   @if type-of(map-get($colors, $color)) !=color {
     @if type-of(map-get(map-get($colors, $color), $tone)) !=color {
-      @return brightness(map-get(map-get($colors, $color), 'base'), $tone);
+      @return rgba(brightness(map-get(map-get($colors, $color), 'base'), $tone), $alpha);
     }
     @else {
-      @return map-get(map-get($colors, $color), $tone);
+      @return rgba(map-get(map-get($colors, $color), $tone), $alpha);
     }
   }
   @else {
-    @return brightness(map-get($colors, $color), $tone);
+    @return rgba(brightness(map-get($colors, $color), $tone), $alpha);
   }
 }
