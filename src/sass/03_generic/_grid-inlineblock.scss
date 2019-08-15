@@ -25,6 +25,11 @@
       margin-left: #{($i / $grid-columns) * 100%};
     }
   }
+  @for $i from 0 through $grid-columns {
+    .col-pull-#{$i} {
+      margin-left: #{($i / $grid-columns) * (-1) * 100%};
+    }
+  }
   @each $device,
   $screen-device in (xl, $screen-xl),
   (lg, $screen-lg),
@@ -42,6 +47,11 @@
           margin-left: #{($i / $grid-columns) * 100%};
         }
       }
+      @for $i from 0 through $grid-columns {
+        .col-#{$device}-pull-#{$i} {
+          margin-left: #{($i / $grid-columns) * (-1) * 100%};
+        }
+      }
     }
   }
   /* Opera hack */
@@ -52,6 +62,12 @@
   @media only screen and (max-width: $page-max-size+$grid-gutter-width) {
     .row {
       margin: 0;
+
+      //nested rows still should have negative margin
+      .row {
+        margin-right: -$grid-gutter-width/2;
+        margin-left: -$grid-gutter-width/2;
+      }
     }
   }
 }
