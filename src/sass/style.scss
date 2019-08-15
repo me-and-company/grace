@@ -37,13 +37,15 @@
 @import '05_layout/site';
 
 // import atoms
-@import '06_atoms/icons';
+@import '06_atoms/icon';
 
 // import helpers
 @import '09_helpers/display';
 @import '09_helpers/flow';
+@import '09_helpers/font';
 @import '09_helpers/hide';
 @import '09_helpers/position';
 @import '09_helpers/spacing';
 @import '09_helpers/text';
+@import '09_helpers/valign';
 @import '09_helpers/visibility';
