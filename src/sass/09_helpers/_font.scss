@@ -1,0 +1,32 @@
+.font-weight-light {
+  font-weight: 300;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.font-weight-medium {
+  font-weight: 500;
+}
+
+.font-weight-bold {
+  font-weight: 700;
+}
+
+
+.font-size-xs {
+  @include font-size(xs);
+}
+
+.font-size-s {
+  @include font-size(s);
+}
+
+.font-size-base {
+  @include font-size(base);
+}
+
+.font-size-l {
+  @include font-size(l);
+}
