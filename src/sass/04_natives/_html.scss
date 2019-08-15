@@ -5,4 +5,9 @@
 html {
   font-family: $base-font-family;
   @include font-size(base);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+
+  overflow: hidden;
+  overflow-y: auto;
 }
