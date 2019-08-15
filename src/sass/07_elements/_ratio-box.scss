@@ -1,0 +1,112 @@
+.ratio-box {
+  width: 100%;
+
+  display: block;
+  overflow: hidden;
+
+  position: relative;
+
+  &::before {
+    content: ' ';
+    padding-top: 100%;
+
+    display: block;
+  }
+
+  .content {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    overflow: hidden;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    img, video {
+      width: 100%;
+      height: auto;
+    }
+
+    img {
+      display: none;
+    }
+  }
+}
+
+.ratio-box.-square {
+  &::before {
+    padding-top: 100%;
+  }
+}
+
+.ratio-box.-half {
+  &::before {
+    padding-top: 50%;
+  }
+}
+
+.ratio-box.-fullhd {
+  &::before {
+    padding-top: 56.25%;
+  }
+}
+
+.ratio-box.-goldenratio {
+  &::before {
+    padding-top: 61.8%;
+  }
+}
+
+.ratio-box.-three-quarters {
+  &::before {
+    padding-top: 75%;
+  }
+}
+
+.ratio-box.-square-caption {
+  &::before {
+    padding-top: 87.5%;
+  }
+}
+
+.ratio-box.-portrait {
+  &::before {
+    padding-top: 116%;
+  }
+}
+
+
+@supports (object-fit: cover) {
+  .ratio-box {
+    .content:not(.-show-background) {
+      background-image: none !important;
+
+      img, video {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+
+        display: inline-block;
+      }
+    }
+  }
+}
+
+@supports (object-fit: cover) and (-ms-ime-align:auto) {
+  .ratio-box {
+    .content:not(.-show-background) {
+      video {
+        height: auto;
+      }
+    }
+  }
+}
