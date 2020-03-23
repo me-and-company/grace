@@ -326,17 +326,17 @@ function delete_images(done) {
 
 function imagemin_compress() {
   return gulp.src([
-      `${paths.images.src}/**/*`,
-      `${paths.images.src}/icons/**/*`,
+    `${paths.images.src}/**/*`,
+    `${paths.images.src}/icons/**/*`,
 
-      // not files / directories below
-      `!${paths.images.src}/**/*.md`,
-      `!${paths.images.src}/_lossless/**/*`,
-      `!${paths.images.src}/_highq/**/*`,
-    ])
+    // not files / directories below
+    `!${paths.images.src}/**/*.md`,
+    `!${paths.images.src}/_lossless/**/*`,
+    `!${paths.images.src}/_highq/**/*`,
+  ])
     .pipe(imagemin([
       mozjpeg({progressive: true, quality: 85}),
-      pngquant({speed: 6, quality: 80}),
+      pngquant({speed: 6, quality: [0.7, 0.8]}),
       svgo(config.svgo)
     ]))
     .pipe(gulp.dest(paths.images.dest))
@@ -349,11 +349,11 @@ function imagemin_highq() {
     // not files / directories below
     `!${paths.images.src}/_highq/**/*.md`,
   ])
-  .pipe(imagemin([
-    mozjpeg({progressive: true, quality: 95}),
-    pngquant({speed: 6, quality: 95}),
-  ]))
-  .pipe(gulp.dest(`${paths.images.dest}_highq`))
+    .pipe(imagemin([
+      mozjpeg({progressive: true, quality: 95}),
+      pngquant({speed: 6, quality: [0.9, 0.95]}),
+    ]))
+    .pipe(gulp.dest(`${paths.images.dest}_highq`))
 }
 
 function imagemin_lossless() {
@@ -363,11 +363,11 @@ function imagemin_lossless() {
     // not files / directories below
     `!${paths.images.src}/_lossless/**/*.md`,
   ])
-  .pipe(imagemin([
-    jpegtran({progessive: true}),
-    pngquant({speed: 6, quality: 100}),
-  ]))
-  .pipe(gulp.dest(`${paths.images.dest}_lossless`))
+    .pipe(imagemin([
+      jpegtran({progessive: true}),
+      pngquant({speed: 6, quality: [0.95, 1]}),
+    ]))
+    .pipe(gulp.dest(`${paths.images.dest}_lossless`))
 }
 
 // Icons to Strings
