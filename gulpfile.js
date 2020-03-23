@@ -53,8 +53,6 @@ const paths = {
 
 const config = {
   // see browserlist: http://browserl.ist/
-  browsers: ['Safari >= 10.1', 'Firefox >= 60', 'Chrome >= 61', 'iOS >= 10.3', 'not IE <= 11', 'Edge >= 16'],
-  browsers_legacy: ['last 4 versions', '> 1%', 'not ie <= 10', 'not Edge <= 13', 'Safari >= 8', 'Firefox ESR'],
   svgo: {
     plugins: [
       {
@@ -73,7 +71,7 @@ const config = {
       },
     ]
   }
-}
+};
 config.babel = {
   "babelrc": false,
   "presets": [
@@ -82,34 +80,13 @@ config.babel = {
       {
         modules: false,
         useBuiltIns: false,
-        "targets": {
-          "browsers": config.browsers
-        }
       }
     ],
     [
       "minify"
     ]
   ]
-}
-config.babel_legacy = {
-  "babelrc": false,
-  "presets": [
-    [
-      "@babel/env",
-      {
-        modules: false,
-        useBuiltIns: false,
-        "targets": {
-          "browsers": config.browsers_legacy
-        }
-      }
-    ],
-    [
-      "minify"
-    ]
-  ]
-}
+};
 
 
 /*
@@ -158,7 +135,6 @@ function styles() {
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(autoprefixer({
-        browsers: config.browsers_legacy,
         cascade: false
     }))
     .pipe(cssnano())
@@ -189,27 +165,6 @@ function scripts_singles() {
     .pipe(gulp.dest(paths.scripts.dest));
 }
 
-function scripts_main_legacy() {
-  return gulp.src([
-      `${paths.scripts.src}/functions/*.js`,
-      `${paths.scripts.src}/modules/*.js`,
-      `${paths.scripts.src}/base/*.js`
-    ], { sourcemaps: true })
-    .pipe(sourcemaps.init())
-    .pipe(
-      babel(Object.assign(
-        config.babel_legacy,
-        {
-          "plugins": [
-            ["transform-remove-console", { "exclude": ["error", "warn"] }]
-          ]
-        }
-      ))
-    )
-    .pipe(concat('main.legacy.min.js'))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(paths.scripts.dest));
-}
 function scripts_main() {
   return gulp.src([
       `${paths.scripts.src}/functions/*.js`,
@@ -232,27 +187,6 @@ function scripts_main() {
     .pipe(gulp.dest(paths.scripts.dest));
 }
 
-function scripts_main_dev_legacy() {
-  return gulp.src([
-      `${paths.scripts.src}/functions/*.js`,
-      `${paths.scripts.src}/modules/*.js`,
-      `${paths.scripts.src}/base/*.js`
-    ], { sourcemaps: true })
-    .pipe(sourcemaps.init())
-    .pipe(
-      babel(Object.assign(
-        config.babel_legacy,
-        {
-          "presets": [
-            config.babel_legacy.presets[0]
-          ]
-        }
-      ))
-    )
-    .pipe(concat('main.legacy.min.js'))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(paths.scripts.dest));
-}
 function scripts_main_dev() {
   return gulp.src([
       `${paths.scripts.src}/functions/*.js`,
@@ -279,7 +213,6 @@ const scripts = gulp.series(
   deleteScripts,
   scripts_libs,
   scripts_singles,
-  scripts_main_legacy,
   scripts_main
 );
 exports.scripts = scripts;
@@ -288,7 +221,6 @@ const scripts_dev = gulp.series(
   deleteScripts,
   scripts_libs,
   scripts_singles,
-  scripts_main_dev_legacy,
   scripts_main_dev
 );
 exports.scripts_dev = scripts_dev;
