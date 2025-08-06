@@ -19,7 +19,7 @@
     "babel-plugin-transform-remove-console": "^6.9.4",
     "browser-sync": "^2.26.7",
     "del": "^3.0.0",
-    "eslint": "^5.12.1",
+    "eslint": "^9.32.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
     "fs": "0.0.2",
